@@ -72,13 +72,47 @@ public class WordSearch {
 	}
 
 	public boolean addWordV(int row, int col, String s) {
-		// not finished
-		return false;
+		if (row<0 || col < 0)
+			return false;
+		if (col >= grid.length || row >= grid[row].length)
+			return false;
+		s = s.toUpperCase();
+		if (grid.length - row < s.length())
+			return false;
+		else{
+			for (int i = 0; i < s.length(); i++){
+				char curr = grid[row+i][col];
+				if (curr != '_' && curr != s.charAt(i)){
+					return false;
+				}
+			}
+		}
+		for (int i= 0; i < s.length(); i++)
+			grid[row+i][col] = s.charAt(i);
+		wordlist.add(s);
+		return true;
+		
 	}
 
 	public boolean addWordD(int row, int col, String s) {
-		// not finished
-		return false;
+		if (row < 0 || col < 0)
+			return false;
+		if (col >= grid.length || row >= grid[row].length)
+			return false;
+		s = s.toUpperCase();
+		if (grid.length - row < s.length() || grid.length - col < s.length())
+			return false;
+		else{
+			for (int i = 0; i < s.length(); i++){
+				char curr = grid[row+i][col+i];
+				if (curr != '_' && curr != s.charAt(i))
+					return false;
+			}
+		}
+		for (int i=0; i<s.length(); i++)
+			grid[row+i][col+i] = s.charAt(i);
+		wordlist.add(s);
+		return true;
 	}
 
 	public void fillGrid() {
