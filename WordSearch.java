@@ -1,3 +1,6 @@
+// Alanna Wong and Tyler Ishikawa
+// Period 9
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.io.FileReader;
@@ -43,12 +46,15 @@ public class WordSearch {
 	}
 
 	public boolean addWordH(int row, int col, String s) {
+		s = s.toUpperCase();
+
+		for (int i = 0; i < wordlist.size(); i++)
+			if (wordlist.get(i).equals(s))
+				return false;
 		if (row < 0 || col < 0)
 			return false;
 		if (row >= grid.length || col >= grid[row].length)
 			return false;
-
-		s = s.toUpperCase();
 
 		if (grid[row].length - col < s.length()) {
 			// checks if there's enough space to fit the word
@@ -72,11 +78,14 @@ public class WordSearch {
 	}
 
 	public boolean addWordV(int row, int col, String s) {
+		s = s.toUpperCase();
+		for (int i = 0; i < wordlist.size(); i++)
+			if (wordlist.get(i).equals(s))
+				return false;
 		if (row<0 || col < 0)
 			return false;
 		if (col >= grid.length || row >= grid[row].length)
 			return false;
-		s = s.toUpperCase();
 		if (grid.length - row < s.length())
 			return false;
 		else{
@@ -95,11 +104,14 @@ public class WordSearch {
 	}
 
 	public boolean addWordD(int row, int col, String s) {
+		s = s.toUpperCase();
+		for (int i = 0; i < wordlist.size(); i++)
+			if (wordlist.get(i).equals(s))
+				return false;
 		if (row < 0 || col < 0)
 			return false;
 		if (col >= grid.length || row >= grid[row].length)
 			return false;
-		s = s.toUpperCase();
 		if (grid.length - row < s.length() || grid.length - col < s.length())
 			return false;
 		else{
@@ -139,9 +151,9 @@ public class WordSearch {
 			w = dictionary.get( r.nextInt(dictionary.size()) );
 
 			// only adds the word in one direction
-			if ( addWordH(row, col, w) ) {}
+			if ( addWordD(row, col, w) ) {}
 			else if ( addWordV(row, col, w) ) {}
-			else if ( addWordD(row, col, w) ) {}
+			else if ( addWordH(row, col, w) ) {}
 			else
 				i--;
 		}
@@ -219,6 +231,7 @@ public class WordSearch {
 		//testing addWords method
 		ws = new WordSearch();
 		ws.addWords(10);
+		System.out.println(ws);
 		ws.fillGrid();
 		System.out.println(ws);
 	}
